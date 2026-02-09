@@ -1,8 +1,1 @@
 @import 'tailwindcss';
-
-@source '../../packages/ui/src';
-
-body {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    sans-serif;
-}
