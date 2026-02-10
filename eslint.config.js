@@ -2,6 +2,7 @@ const tsParser = require('@typescript-eslint/parser');
 const tsPlugin = require('@typescript-eslint/eslint-plugin');
 const react = require('eslint-plugin-react');
 const reactHooks = require('eslint-plugin-react-hooks');
+const prettierConfig = require('eslint-config-prettier/flat');
 
 module.exports = [
   {
@@ -28,4 +29,5 @@ module.exports = [
       'react/react-in-jsx-scope': 'off',
     },
   },
+  prettierConfig,
 ];
