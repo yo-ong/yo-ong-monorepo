@@ -34,6 +34,7 @@ const App = () => {
             <Link to="/settings" className="hover:text-gray-900">
               Settings
             </Link>
+            fiber test
           </nav>
         </div>
       </header>
