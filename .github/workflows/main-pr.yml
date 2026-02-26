@@ -8,7 +8,7 @@ on:
 jobs:
   Test:
     name: Lint Check
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out Code
