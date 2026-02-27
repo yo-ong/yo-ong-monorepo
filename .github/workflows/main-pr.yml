@@ -6,7 +6,7 @@ on:
     branches: ["main"]
 
 jobs:
-  Test:
+  Lint:
     name: Lint Check
     runs-on: ubuntu-latest
 
@@ -44,3 +44,37 @@ jobs:
 
       - name: Lint
         run: pnpm run lint
+        
+  AI-PR-Review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Cursor CLI
+        run: npm install -g @cursor-ai/cli
+
+      - name: Run AI Diff Review
+        env:
+          CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
+        run: |
+          cursor review \
+            --diff-only \
+            --language typescript \
+            --focus "useEffect,performance,logic" \
+            --ignore "**/*.test.ts,**/*.stories.tsx" \
+            --output review.md
+
+      - name: Post PR Comment
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr comment ${{ github.event.pull_request.number }} \
+            --body-file review.md
