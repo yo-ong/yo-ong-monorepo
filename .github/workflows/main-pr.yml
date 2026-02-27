@@ -5,6 +5,11 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     branches: ["main"]
 
+permissions:
+  pull-requests: write
+  contents: read
+  issues: write
+  
 jobs:
   Lint:
     name: Lint Check
@@ -44,37 +49,42 @@ jobs:
 
       - name: Lint
         run: pnpm run lint
-        
-  AI-PR-Review:
+
+  AI-review:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-      contents: read
+    if: github.event.pull_request.draft == false
 
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
         with:
-          node-version: 20
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Install Cursor CLI
-        run: npm install -g @cursor-ai/cli
+        run: |
+          curl https://cursor.com/install -fsS | bash
+          echo "$HOME/.cursor/bin" >> $GITHUB_PATH
 
-      - name: Run AI Diff Review
+      - name: Configure Git identity
+        run: |
+          git config user.name "Cursor Agent"
+          git config user.email "cursoragent@cursor.com"
+
+      - name: Run Cursor Review (Diff-based)
         env:
           CURSOR_API_KEY: ${{ secrets.CURSOR_API_KEY }}
-        run: |
-          cursor review \
-            --diff-only \
-            --language typescript \
-            --focus "useEffect,performance,logic" \
-            --ignore "**/*.test.ts,**/*.stories.tsx" \
-            --output review.md
-
-      - name: Post PR Comment
-        env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh pr comment ${{ github.event.pull_request.number }} \
-            --body-file review.md
+          cursor-agent --force --output-format=text --print "
+          You are performing a pull request code review.
+
+          Focus on:
+          1. React useEffect dependency issues
+          2. Performance risks (unnecessary re-renders, large imports, missing memoization)
+          3. Business logic errors or missing edge cases
+          4. TypeScript safety issues
+
+          Only review the changes in this pull request.
+          Provide concise actionable comments.
+          "
