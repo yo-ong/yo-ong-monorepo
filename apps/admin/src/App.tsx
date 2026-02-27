@@ -1,25 +1,6 @@
 import { Link, Route, Routes } from 'react-router-dom';
-import { Button } from '@repo/ui';
-
-const Home = () => {
-  return (
-    <section className="space-y-4">
-      <h2 className="text-2xl font-semibold">Admin Home</h2>
-      <p className="text-gray-600">React Router DOM is wired up.</p>
-      <Button>Primary Action</Button>
-    </section>
-  );
-};
-
-const Settings = () => {
-  return (
-    <section className="space-y-4">
-      <h2 className="text-2xl font-semibold">Settings</h2>
-      <p className="text-gray-600">This route is handled by React Router.</p>
-      <Button variant="secondary">Secondary Action</Button>
-    </section>
-  );
-};
+import Home from './pages/home';
+import Settings from './pages/settings';
 
 const App = () => {
   return (
