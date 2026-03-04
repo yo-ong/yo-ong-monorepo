@@ -1,0 +1,19 @@
+---
+description: "Vite + React admin 앱 구조 및 라우팅 패턴"
+globs: ["apps/admin/**/*"]
+alwaysApply: false
+---
+
+# Vite Admin Patterns
+
+## 구조
+- `apps/admin/src/` - 소스
+- `App.tsx` - 메인 앱, react-router-dom Routes
+- `pages/` - 페이지 컴포넌트
+
+## 라우팅
+- react-router-dom의 Link, Route, Routes 사용
+- path="/" → Home, path="/settings" → Settings
+
+## 패키지 사용
+- `@repo/ui`, `@repo/api-client`, `@repo/utils` import

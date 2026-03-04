@@ -1,0 +1,21 @@
+---
+description: "React 컴포넌트 작성 시 Tailwind 스타일, packages/ui 패턴 준수"
+globs: ["**/*.tsx", "**/*.jsx"]
+alwaysApply: false
+---
+
+# React Components
+
+## 스타일링
+- Tailwind CSS 사용
+- 인라인 className으로 스타일 적용
+- variant 패턴 사용 시 Record로 variant별 className 매핑
+
+## 컴포넌트 구조
+- 함수형 컴포넌트, named export
+- Props는 컴포넌트 상단에 정의
+- HTML 요소 props는 spread로 전달 (`...props`)
+
+## packages/ui 참고
+- 새 공통 UI는 `packages/ui`에 추가
+- 기존 Button, Card 등 패턴 참고: packages/ui/src/Button.tsx
