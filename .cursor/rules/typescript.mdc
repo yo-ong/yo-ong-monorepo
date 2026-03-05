@@ -1,0 +1,11 @@
+---
+description: TypeScript coding standards
+globs: "**/*.ts,**/*.tsx"
+alwaysApply: false
+---
+
+# TypeScript Standards
+
+- **Never use `any`** — Use `unknown`, generics, or proper types instead
+- **Error handling**: Log and rethrow with cause; avoid empty catch blocks
+- **Shared config**: Extend `tsconfig.base.json` in packages/apps
