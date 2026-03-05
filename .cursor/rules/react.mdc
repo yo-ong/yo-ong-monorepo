@@ -1,0 +1,12 @@
+---
+description: React component patterns
+globs: "**/*.tsx"
+alwaysApply: false
+---
+
+# React Patterns
+
+- Use functional components
+- Extract custom hooks for reusable logic
+- Use shared UI from `@repo/ui` (Button, Card, etc.)
+- Tailwind for styling; colocate classes with components

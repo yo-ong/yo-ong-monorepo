@@ -1,0 +1,12 @@
+---
+description: Monorepo structure and workspace conventions
+alwaysApply: true
+---
+
+# Monorepo Conventions
+
+- **Package manager**: pnpm (workspace root)
+- **Build orchestration**: Turborepo (`turbo run dev`, `turbo run build`)
+- **Workspace packages**: `apps/*` and `packages/*` (see `pnpm-workspace.yaml`)
+- **Internal packages**: Use `@repo/*` (e.g. `@repo/ui`, `@repo/utils`, `@repo/api-client`)
+- **Scripts**: Run from root with `pnpm dev`, `pnpm dev:web`, `pnpm dev:admin`, `pnpm build`, `pnpm lint`, `pnpm tsc`
