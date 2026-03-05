@@ -1,0 +1,19 @@
+---
+description: "Next.js app 디렉터리 구조 및 App Router 패턴"
+globs: ["apps/web/**/*"]
+alwaysApply: false
+---
+
+# Next.js Patterns
+
+## 구조
+- `apps/web/app/` - App Router
+- `page.tsx` - 페이지 컴포넌트
+- `layout.tsx` - 레이아웃
+
+## 패키지 사용
+- `@repo/ui`, `@repo/api-client`, `@repo/utils` import
+
+## 스타일
+- globals.css 사용
+- Tailwind 적용
